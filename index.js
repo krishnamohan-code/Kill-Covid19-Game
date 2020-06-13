@@ -19,16 +19,11 @@ var Time=1;
 var Comments=["Nice Try!","Goood!!","Superb!!","Impressive!!","Awesome!!","Maginificent!!","Extreme!!","Glorious!!","Outstanding!!","Mind-blowing!!"];
 function MoveRight()
 {
-    
     ContinuouslyMove=true;
     ToMoveContinuously=1;
-
-      
-
 }
 function MoveLeft()
 {
-
     ContinuouslyMove=true;
     ToMoveContinuously=-1;   
 }
@@ -37,12 +32,12 @@ function BodyLoaded()
 {
     $("#MainMenu").fadeToggle(300);
     $("#L_Parent").hide();
-    clearInterval(int1);
-    
+    clearInterval(int1); 
 }
 
 
-
+let BulletSound=new Audio();
+BulletSound.src="sf_laser_15.mp3";
 function Move(Amount) 
 {
     var Player=document.getElementById("Player");
@@ -55,7 +50,7 @@ function Move(Amount)
     BulletX+=Amount;
     if(!Shooted)
         {
-            document.getElementById("Bullet").style.left=BulletX;
+            document.getElementById("Bullet").style.left=BulletX;   
         }
     
 }
@@ -63,6 +58,7 @@ function Shoot()
 {
     if(!GameOver)
        $("#Bullet").show();
+      
     Shooted=true;
 }
 
@@ -78,6 +74,7 @@ function ToggleBullet()
     if(!Shooted)
         {
             Bullet.style.left=BulletX;
+            BulletSound.play();
         }
     if(BulletY<=-window.innerHeight-30)
         {
@@ -86,6 +83,7 @@ function ToggleBullet()
             Bullet.style.left=BulletX;
             Shooted=false;
             $(Bullet).hide();
+            BulletSound.play();
         }
     
     
@@ -143,7 +141,7 @@ function VirusCollidingY(index)
                 continue;
             var height=parseInt($(virus[index]).attr("height"));
             console.log(height);
-            
+        
             var PosY=parseFloat($(virus[index]).css("top"));
             var _height=parseInt($(virus[i]).attr("height"));
             var _yPos=parseFloat($(virus[i]).css("top"));
@@ -263,10 +261,6 @@ function DestroyVirus()
                    Shooted=false;
                    $("#Bullet").hide();
                    AddScore(10);
-
-                   
-                   
-
                }
 
 
