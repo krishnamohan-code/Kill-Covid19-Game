@@ -5,4 +5,5 @@
  **OUTPUT**
  
  *Weapon Control by left and right keys/Buttons*
-![alt](Game.PNG)
+![alt](game.PNG)
+<!-- ![alt](Game.png) -->
