@@ -18,7 +18,7 @@ var deg=0;
 var Time=1;
 var Comments=["Nice Try!","Goood!!","Superb!!","Impressive!!","Awesome!!","Maginificent!!","Extreme!!","Glorious!!","Outstanding!!","Mind-blowing!!"];
 function MoveRight()
-{
+{   
     ContinuouslyMove=true;
     ToMoveContinuously=1;
 }
@@ -33,6 +33,7 @@ function BodyLoaded()
     $("#MainMenu").fadeToggle(300);
     $("#L_Parent").hide();
     clearInterval(int1); 
+
 }
 
 
@@ -45,6 +46,7 @@ function Move(Amount)
     console.log(CollisionDetector);
     
     PlayerX+=Amount;
+    // PlayerX+=1;
     Player.style.left=PlayerX;
     document.getElementById("CollisionDetector").style.left=CollisionDetector+Amount;
     BulletX+=Amount;
@@ -92,9 +94,8 @@ function setRandomVirusPosition()
 {
     var virus=document.getElementsByClassName("virus");
     for(var i=0;i<virus.length;i++)
-        {
+        {   
             var width=parseInt($(virus[i]).attr("width"));
-            // var height=parseInt($(virus[i]).attr("height"));
             $(virus[i]).css("left",RangedRandomNumberGenerator(30,document.getElementById("PlaygroundParent").offsetWidth-width));
             do
                $(virus[i]).css("top",RangedRandomNumberGenerator(-window.innerHeight-170,-40));
@@ -183,7 +184,6 @@ function Load()
     var LoadingBar=document.getElementById("Load");
     LoadingBar.style.transform="rotate("+deg+"deg)";
     LoadingBar.style.webkitTransform="rotate("+deg+"deg)";
-   // LoadingBar.style.mozTransform="rotate("+deg+"deg)";
     deg+=2;
     if(deg>=360)
         {
@@ -228,16 +228,11 @@ function DestroyVirus()
     var BulletElement=document.getElementById("Bullet");
     for(var i=0;i<Virus.length;i++)
         {
-                        
-        
               var  vx=Virus[i].offsetLeft;
               var  vy=Virus[i].offsetTop;
               var  vh=Virus[i].offsetHeight;
-              var  vw=Virus[i].offsetWidth;
-            
-
-
-            var Bullet=
+              var  vw=Virus[i].offsetWidth
+          var Bullet=
             {
             
                  x:BulletElement.offsetLeft +document.getElementById("PlayerParent").offsetLeft,
@@ -262,9 +257,6 @@ function DestroyVirus()
                    $("#Bullet").hide();
                    AddScore(10);
                }
-
-
-
         }
 }
 
@@ -324,19 +316,31 @@ function DestroyPlayer()
 function AddEventListeners()
 {
     CollisionDetectorX=parseInt($("#CollisionDetector").css("left"));
-    document.getElementById("Left").addEventListener("mousedown",MoveLeft);
-    document.getElementById("Right").addEventListener("mousedown",MoveRight);
-    document.getElementById("Left").addEventListener("mouseup",StopMovingContinuously);
-    document.getElementById("Right").addEventListener("mouseup",StopMovingContinuously);
+    // document.getElementById("Left").addEventListener("mousedown",MoveLeft);
+    // document.getElementById("Right").addEventListener("mousedown",MoveRight);
+    // document.getElementById("Left").addEventListener("mouseup",StopMovingContinuously);
+    // document.getElementById("Right").addEventListener("mouseup",StopMovingContinuously);
 
-
+  
+    window.addEventListener("keydown",MoveWeapon)
+    function MoveWeapon(event)
+    {
+        switch (event.key) {
+            case "ArrowLeft":    MoveLeft();
+              break;
+            case "ArrowRight":    MoveRight();break;
+        
+            default:
+                break;
+        }
+    }
 
     //For Android devices...
 
-    document.getElementById("Left").addEventListener("touchstart",MoveLeft)
-    document.getElementById("Right").addEventListener("touchstart",MoveRight)
-    document.getElementById("Left").addEventListener("touchend",StopMovingContinuously);
-    document.getElementById("Right").addEventListener("touchend",StopMovingContinuously);
+    // document.getElementById("Left").addEventListener("touchstart",MoveLeft)
+    // document.getElementById("Right").addEventListener("touchstart",MoveRight)
+    // document.getElementById("Left").addEventListener("touchend",StopMovingContinuously);
+    // document.getElementById("Right").addEventListener("touchend",StopMovingContinuously);
 
 
 
